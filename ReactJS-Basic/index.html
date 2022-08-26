@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./script.js"></script>
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+
+    <div id="root"></div>
+    <div id="root1"></div>
+    <div id="root2"></div>
+    <div id="root3"></div>
+    <div id="root4"></div>
+    <div id="root5"></div>
+
+    <script>
+        // DOM Element
+
+        const h1Dom = document.createElement('h1');
+
+        h1Dom.title = 'Hello';
+        h1Dom.className = 'heading';
+        h1Dom.innerText = 'Hello Guys';
+        document.body.appendChild(h1Dom);
+
+
+        const ulDom = document.createElement('ul');
+        const liDom1 = document.createElement('li');
+        const liDom2 = document.createElement('li');
+
+        ulDom.id = 'ul-li';
+        ulDom.style = 'color: red;';
+        liDom1.innerHTML = 'Java Script';
+        liDom2.innerHTML = 'ReactJS';
+        ulDom.appendChild(liDom1);
+        ulDom.appendChild(liDom2);
+        document.body.appendChild(ulDom);
+
+        // React Element
+
+        const h1React = React.createElement('h1', {
+            title: 'hello',
+            className: 'heading'
+        }, 'HELLO GUYS');
+
+        const ulReact = React.createElement(
+            'ul',
+            {
+                id: 'ul-id',
+                style: 'color: red;'
+            },
+            React.createElement('li', {
+                id: 'li-id1'
+            }, 'Java Script'),
+            React.createElement('li', null, 'ReactJS'),
+        );
+
+        console.dir(ulReact);
+
+
+        // React Dom
+
+        const postItem = React.createElement('div', {
+            className: 'post-item'
+        },
+            React.createElement(
+                'h2',
+                {
+                    title: 'Học react tại F8'
+                },
+                'Học ReactJS'
+            ),
+            React.createElement('p', {}, 'Học ReactJS từ cơ bản đến nâng cao')
+        );
+
+        const root = document.getElementById('root');
+
+        ReactDOM.render(postItem, root);
+    </script>
+
+    <!-- JSX -->
+    <script type="text/babel">
+        const reactCourse = 'ReactF8';
+
+        const ul = <ul>
+            <li>js</li>
+            <li>react</li>
+        </ul>
+
+        ReactDOM.render(ul, document.getElementById('root1'));
+
+
+        const courses = [
+            {
+                name: 'html, css'
+            },
+            {
+                name: 'javascript'
+            },
+            {
+                name: 'reactjs'
+            }
+        ]
+
+        const jsx = (
+            <ul>
+                {courses.map((course, index) =>
+                    <li key={index}>{course.name}</li>
+                )}
+            </ul>
+        );
+
+        ReactDOM.render(jsx, document.getElementById('root2'));
+
+
+        ////React element types | React components
+
+        function Header() {
+            return <div class="header">Header</div>;
+        }
+
+        function Footer() {
+            return <div class="footer">Footer</div>;
+        }
+
+        class Content extends React.Component {
+            render() {
+                return (<div class="content">Content</div>);
+            }
+        }
+        const app = (
+            <div class="wrapper">
+                <Header />
+                <Content />
+                <Footer />
+            </div>
+        );
+
+        ReactDOM.render(app, document.getElementById('root4'));
+
+
+        // Props
+
+        function PostItem({
+            image, title, description, publishedAt, callback = () => { }
+        }) {
+            callback(Math.random);
+
+            return (
+                <div class="post-item">
+                    <img src={image} alt={title} />
+                    <h2 className="post-title">{title}</h2>
+                    <p className="post-desc">{description}</p>
+                    <p className="published">{publishedAt}</p>
+                </div>
+            );
+        }
+
+        function App1() {
+            return (
+                <div id="wrapper">
+                    <PostItem
+                        title="Kiến Thức Nhập Môn IT"
+                        image="https://files.fullstack.edu.vn/f8-prod/courses/7.png"
+                        description="Để có cái nhìn tổng quan về ngành IT - Lập trình web các bạn nên xem các videos tại khóa này trước nhé."
+                        publishedAt="2020-02-10T14:23:13.000000Z"
+                        callback={(random) => {
+                            console.log(random);
+                        }}
+                    />
+                    <br />
+                    <PostItem
+                        title="HTML CSS từ Zero đến Hero"
+                        image="https://files.fullstack.edu.vn/f8-prod/courses/2.png"
+                        description="Trong khóa này chúng ta sẽ cùng nhau xây dựng giao diện 2 trang web là The Band & Shopee."
+                        publishedAt="2020-02-10T14:23:13.000000Z"
+                    />
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App1 />, document.getElementById('root3'));
+
+
+        const courses1 = [{
+            "id": 7,
+            "title": "Kiến Thức Nhập Môn IT",
+            "slug": "lessons-for-newbie",
+            "description": "Để có cái nhìn tổng quan về ngành IT - Lập trình web các bạn nên xem các videos tại khóa này trước nhé.",
+            "image": "courses/7.png",
+            "icon": "courses/7/6200b81f52d83.png",
+            "video_type": "youtube",
+            "video": "M62l1xA5Eu8",
+            "old_price": 0,
+            "price": 0,
+            "pre_order_price": 0,
+            "students_count": 79200,
+            "is_pro": false,
+            "is_coming_soon": false,
+            "is_selling": false,
+            "published_at": "2020-02-10T14:23:13.000000Z",
+            "is_registered": false,
+            "user_progress": 0,
+            "last_completed_at": null,
+            "image_url": "https://files.fullstack.edu.vn/f8-prod/courses/7.png",
+            "icon_url": "https://files.fullstack.edu.vn/f8-prod/courses/7/6200b81f52d83.png",
+            "video_url": "https://www.youtube.com/watch?v=M62l1xA5Eu8",
+            "landing_page_url": "/courses/lessons-for-newbie",
+            "is_pre_order": false,
+            "is_published": true
+        },
+        {
+            "id": 2,
+            "title": "HTML CSS từ Zero đến Hero",
+            "slug": "html-css",
+            "description": "Trong khóa này chúng ta sẽ cùng nhau xây dựng giao diện 2 trang web là The Band & Shopee.",
+            "image": "courses/2.png",
+            "icon": "courses/2/6200aecea81de.png",
+            "video_type": "youtube",
+            "video": "R6plN3FvzFY",
+            "old_price": 0,
+            "price": 0,
+            "pre_order_price": 0,
+            "students_count": 122818,
+            "is_pro": false,
+            "is_coming_soon": false,
+            "is_selling": false,
+            "published_at": "2020-02-10T14:23:13.000000Z",
+            "is_registered": false,
+            "user_progress": 0,
+            "last_completed_at": null,
+            "image_url": "https://files.fullstack.edu.vn/f8-prod/courses/2.png",
+            "icon_url": "https://files.fullstack.edu.vn/f8-prod/courses/2/6200aecea81de.png",
+            "video_url": "https://www.youtube.com/watch?v=R6plN3FvzFY",
+            "landing_page_url": "/courses/html-css",
+            "is_pre_order": false,
+            "is_published": true
+        },
+        {
+            "id": 3,
+            "title": "Responsive Với Grid System",
+            "slug": "responsive-web-design",
+            "description": "Trong khóa này chúng ta sẽ học về cách xây dựng giao diện web responsive với Grid System, tương tự Bootstrap 4.",
+            "image": "courses/3.png",
+            "icon": "courses/3/6200afe1240bb.png",
+            "video_type": "youtube",
+            "video": "uz5LIP85J5Y",
+            "old_price": 0,
+            "price": 0,
+            "pre_order_price": 0,
+            "students_count": 27973,
+            "is_pro": false,
+            "is_coming_soon": false,
+            "is_selling": false,
+            "published_at": "2020-02-10T14:23:13.000000Z",
+            "is_registered": false,
+            "user_progress": 0,
+            "last_completed_at": null,
+            "image_url": "https://files.fullstack.edu.vn/f8-prod/courses/3.png",
+            "icon_url": "https://files.fullstack.edu.vn/f8-prod/courses/3/6200afe1240bb.png",
+            "video_url": "https://www.youtube.com/watch?v=uz5LIP85J5Y",
+            "landing_page_url": "/courses/responsive-web-design",
+            "is_pre_order": false,
+            "is_published": true
+        },
+        {
+            "id": 1,
+            "title": "Lập Trình JavaScript Cơ Bản",
+            "slug": "javascript-co-ban",
+            "description": "Học Javascript cơ bản phù hợp cho người chưa từng học lập trình. Với hơn 100 bài học và có bài tập thực hành sau mỗi bài học.",
+            "image": "courses/1.png",
+            "icon": "courses/1/6200ad9d8a2d8.png",
+            "video_type": "youtube",
+            "video": "0SJE9dYdpps",
+            "old_price": 0,
+            "price": 0,
+            "pre_order_price": 0,
+            "students_count": 78855,
+            "is_pro": false,
+            "is_coming_soon": false,
+            "is_selling": false,
+            "published_at": "2020-02-10T14:23:13.000000Z",
+            "is_registered": false,
+            "user_progress": 0,
+            "last_completed_at": null,
+            "image_url": "https://files.fullstack.edu.vn/f8-prod/courses/1.png",
+            "icon_url": "https://files.fullstack.edu.vn/f8-prod/courses/1/6200ad9d8a2d8.png",
+            "video_url": "https://www.youtube.com/watch?v=0SJE9dYdpps",
+            "landing_page_url": "/courses/javascript-co-ban",
+            "is_pre_order": false,
+            "is_published": true
+        },
+        {
+            "id": 12,
+            "title": "Lập Trình JavaScript Nâng Cao",
+            "slug": "javascript-nang-cao",
+            "description": "Hiểu sâu hơn về cách Javascript hoạt động, tìm hiểu về IIFE, closure, reference types, this keyword, bind, call, apply, prototype, ...",
+            "image": "courses/12.png",
+            "icon": "courses/12/6200af2620118.png",
+            "video_type": "youtube",
+            "video": "MGhw6XliFgo",
+            "old_price": 0,
+            "price": 0,
+            "pre_order_price": 0,
+            "students_count": 20076,
+            "is_pro": false,
+            "is_coming_soon": false,
+            "is_selling": false,
+            "published_at": "2020-02-10T14:23:13.000000Z",
+            "is_registered": false,
+            "user_progress": 0,
+            "last_completed_at": null,
+            "image_url": "https://files.fullstack.edu.vn/f8-prod/courses/12.png",
+            "icon_url": "https://files.fullstack.edu.vn/f8-prod/courses/12/6200af2620118.png",
+            "video_url": "https://www.youtube.com/watch?v=MGhw6XliFgo",
+            "landing_page_url": "/courses/javascript-nang-cao",
+            "is_pre_order": false,
+            "is_published": true
+        },
+        {
+            "id": 14,
+            "title": "Làm việc với Terminal & Ubuntu",
+            "slug": "windows-terminal-wsl",
+            "description": "Sở hữu một Terminal hiện đại, mạnh mẽ trong tùy biến và học cách làm việc với Ubuntu là một bước quan trọng trên con đường trở thành một Web Developer.",
+            "image": "courses/14/624faac11d109.png",
+            "icon": "courses/14/624faac2ee23d.png",
+            "video_type": "youtube",
+            "video": "7ppRSaGT1uw",
+            "old_price": 0,
+            "price": 0,
+            "pre_order_price": 0,
+            "students_count": 6510,
+            "is_pro": false,
+            "is_coming_soon": false,
+            "is_selling": false,
+            "published_at": "2020-02-10T14:23:13.000000Z",
+            "is_registered": false,
+            "user_progress": 0,
+            "last_completed_at": null,
+            "image_url": "https://files.fullstack.edu.vn/f8-prod/courses/14/624faac11d109.png",
+            "icon_url": "https://files.fullstack.edu.vn/f8-prod/courses/14/624faac2ee23d.png",
+            "video_url": "https://www.youtube.com/watch?v=7ppRSaGT1uw",
+            "landing_page_url": "/courses/windows-terminal-wsl",
+            "is_pre_order": false,
+            "is_published": true
+        }];
+
+        const courseItem1 = ({course})  => {
+            <div>
+                <h2>{course.title}</h2>
+                <img src={course.image_url} />
+                <p>{course.description}</p>
+                <p>{course.students_count}</p>
+            </div>
+        };
+
+        function App2() {
+            return (
+                <div id="wrapper">
+                    {courses1.map(course => (
+                        <CourseItem 
+                            key={course.id}
+                            course = {course}
+                        />
+                    ))}
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App2 />, document.getElementById('root5'));
+
+    </script>
+</body>
+
+</html>
