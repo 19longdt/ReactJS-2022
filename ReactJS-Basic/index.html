@@ -20,6 +20,7 @@
     <div id="root3"></div>
     <div id="root4"></div>
     <div id="root5"></div>
+    <div id="root6"></div>
 
     <script>
         // DOM Element
@@ -124,20 +125,20 @@
         ////React element types | React components
 
         function Header() {
-            return <div class="header">Header</div>;
+            return <div className="header">Header</div>;
         }
 
         function Footer() {
-            return <div class="footer">Footer</div>;
+            return <div className="footer">Footer</div>;
         }
 
         class Content extends React.Component {
             render() {
-                return (<div class="content">Content</div>);
+                return (<div className="content">Content</div>);
             }
         }
         const app = (
-            <div class="wrapper">
+            <div className="wrapper">
                 <Header />
                 <Content />
                 <Footer />
@@ -155,7 +156,7 @@
             callback(Math.random);
 
             return (
-                <div class="post-item">
+                <div className="post-item">
                     <img src={image} alt={title} />
                     <h2 className="post-title">{title}</h2>
                     <p className="post-desc">{description}</p>
@@ -353,7 +354,7 @@
             "is_published": true
         }];
 
-        const courseItem1 = ({course})  => {
+        const courseItem1 = ({ course }) => {
             <div>
                 <h2>{course.title}</h2>
                 <img src={course.image_url} />
@@ -366,9 +367,9 @@
             return (
                 <div id="wrapper">
                     {courses1.map(course => (
-                        <CourseItem 
+                        <courseItem1
                             key={course.id}
-                            course = {course}
+                            course={course}
                         />
                     ))}
                 </div>
@@ -376,6 +377,24 @@
         }
 
         ReactDOM.render(<App2 />, document.getElementById('root5'));
+
+
+        // DOM event
+        function App3() {
+            return (
+                <div id="wrapper1">
+                    <button
+                        onClick={() =>
+                            console.log(Math.random())
+                        }
+                    >
+                        Click me!
+                    </button>
+                </div>
+            );
+        };
+
+        ReactDOM.render(<App3/>, document.getElementById('root6'));
 
     </script>
 </body>
