@@ -23,6 +23,12 @@
     <div id="root6"></div>
     <div id="root7"></div>
     <div id="root8"></div>
+    <div id="root9"></div>
+    <div id="root10"></div>
+    <div id="root11"></div>
+    <div id="root12"></div>
+    <div id="root13"></div>
+    <div id="root14"></div>
 
     <script>
         // DOM Element
@@ -464,6 +470,56 @@
         }
 
         ReactDOM.render(<App5 />, document.getElementById('root8'));
+
+
+        // Spread/Rest props, Children props & Render props?
+
+        function Input({ label, ...inputProps }) {
+            return (
+                <div>
+                    <label>{label}</label>
+                    <input {...inputProps} ></input>
+                </div>
+            );
+        }
+
+        function App6() {
+            return (
+                <div id="wrapper">
+                    <Input
+                        label="Full name"
+                        type="text"
+                        placeholder="enter name.."
+                        title="input"
+                        onFocus={() => {
+                            console.log(Math.random())
+                        }}
+                    />
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App6 />, document.getElementById('root9'));
+
+        function List({ data }) {
+            return (
+                <ul>
+                    {data.map(item => <li key={item}>{item}</li>)}
+                </ul>
+            );
+        }
+
+        function App7() {
+            const cars = ['bmw', 'honda', '...'];
+
+            return (
+                <div id="wrapper">
+                    <List data={cars} />
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App7 />, document.getElementById('root10'));
 
     </script>
 </body>
