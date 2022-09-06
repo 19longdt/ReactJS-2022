@@ -1,5 +1,5 @@
-import { useState } from 'react'
-
+import { useState } from 'react';
+import UseEffect from './useEffectHook';
 
 const orders = [100, 200, 300];
 function App() {
@@ -29,6 +29,8 @@ function App() {
     })
   };
 
+  const [show, setShow] = useState(false);
+
   return (
     <div className="App" style={{ padding: 20 }}>
       <h1>{counter}</h1>
@@ -38,6 +40,12 @@ function App() {
 
       <h2>{JSON.stringify(info)}</h2>
       <button onClick={handleUpdate}>Update</button>
+
+      <br></br>
+      <br></br>
+
+      <button onClick={() => setShow(!show)} >Toggle</button>
+      {show && <UseEffect/>}
     </div>
   );
 }
