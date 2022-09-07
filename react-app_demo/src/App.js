@@ -1,5 +1,8 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import UseEffect from './useEffectHook';
+import UseLayoutEffect from './useLayoutEffectHook';
+import UseRefHook from './useRefHook';
+import UseCallbackHook from './useCallbackHook'
 
 const orders = [100, 200, 300];
 function App() {
@@ -16,11 +19,11 @@ function App() {
     age: 12
   });
 
-  const handleIncrease = () => {
-    // setCounter(counter + 1);
-
-    setCounter(preState => preState + 1);
-  };
+  const handleIncrease = useCallback(() => {
+      // setCounter(counter + 1);
+      setCounter(preState => preState + 1);
+    }
+  );
 
   const handleUpdate = () => {
     setInfo({
@@ -30,6 +33,9 @@ function App() {
   };
 
   const [show, setShow] = useState(false);
+  const [show1, setShow1] = useState(false);
+  const [show2, setShow2] = useState(false);
+  const [show3, setShow3] = useState(false);
 
   return (
     <div className="App" style={{ padding: 20 }}>
@@ -44,8 +50,14 @@ function App() {
       <br></br>
       <br></br>
 
-      <button onClick={() => setShow(!show)} >Toggle</button>
-      {show && <UseEffect/>}
+      <button onClick={() => setShow(!show)} >UseEffect</button>
+      {show && <UseEffect />}
+      <button onClick={() => setShow1(!show1)} >UseLayoutEffect</button>
+      {show1 && <UseLayoutEffect />}
+      <button onClick={() => setShow2(!show2)} >UseRef</button>
+      {show2 && <UseRefHook />}
+      <button onClick={() => setShow3(!show3)} >UseCallbackHook</button>
+      {show3 && <UseCallbackHook onIncrease={handleIncrease} />}
     </div>
   );
 }

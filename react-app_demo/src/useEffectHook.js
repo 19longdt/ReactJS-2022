@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-
+let timer;
 const tabs = ['posts', 'comments', 'album'];
 function useEffectHook() {
 
@@ -37,7 +37,6 @@ function useEffectHook() {
     const [width, setWidth] = useState(window.innerWidth);
 
     useEffect(() => {
-
         const hanleScroll = () => {
             // if(window.scrollY){
             //     setShowGoTop(true);
@@ -57,11 +56,9 @@ function useEffectHook() {
     }, []);
 
     useEffect(() => {
-
         const handlerResize = () => {
             setWidth(window.innerWidth);
         }
-
         window.addEventListener('resize', handlerResize);
 
         return () => {
@@ -71,26 +68,25 @@ function useEffectHook() {
 
     // IV. with Timer functions
 
-    const [countdown, setCountdown] = useState(10);
+    const [countdown, setCountdown] = useState(5);
 
     useEffect(() => {
-        const timer = setInterval(() => {
+        timer = setInterval(() => {
             setCountdown(prev => prev - 1);
         }, 1000);
 
-        if(timer === 0){
-            clearInterval(timer);
-        }
-
         return () => clearInterval(timer);
     }, []);
+
+    if(countdown == 0){
+        clearInterval(timer);
+    }
 
     //V. useEffect() with preview image
 
     const [imgFile, setimgFile] = useState();
 
     useEffect(() => {
-
         return () => {
             imgFile && URL.revokeObjectURL(imgFile.preview);
         };
@@ -98,7 +94,6 @@ function useEffectHook() {
 
     const handlePreviewImg = (e) => {
         const file = e.target.files[0];
-
         file.preview = URL.createObjectURL(file);
 
         setimgFile(file);
