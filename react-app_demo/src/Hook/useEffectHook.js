@@ -78,7 +78,7 @@ function useEffectHook() {
         return () => clearInterval(timer);
     }, []);
 
-    if(countdown == 0){
+    if(countdown === 0){
         clearInterval(timer);
     }
 

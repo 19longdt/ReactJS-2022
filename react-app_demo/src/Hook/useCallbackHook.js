@@ -1,4 +1,4 @@
-import { memo, useState, useCallback } from "react";
+import { memo } from "react";
 
 function useCallbackHook({ onIncrease }) {
 

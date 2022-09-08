@@ -1,8 +1,10 @@
 import { useCallback, useState } from 'react';
-import UseEffect from './useEffectHook';
-import UseLayoutEffect from './useLayoutEffectHook';
-import UseRefHook from './useRefHook';
-import UseCallbackHook from './useCallbackHook'
+import UseEffect from './Hook/useEffectHook';
+import UseLayoutEffect from './Hook/useLayoutEffectHook';
+import UseRefHook from './Hook/useRefHook';
+import UseCallbackHook from './Hook/useCallbackHook';
+import UseMemo from './Hook/useMemo';
+import UseReducer from './Hook/useReducerHook';
 
 const orders = [100, 200, 300];
 function App() {
@@ -36,6 +38,8 @@ function App() {
   const [show1, setShow1] = useState(false);
   const [show2, setShow2] = useState(false);
   const [show3, setShow3] = useState(false);
+  const [show4, setShow4] = useState(false);
+  const [show5, setShow5] = useState(false);
 
   return (
     <div className="App" style={{ padding: 20 }}>
@@ -58,6 +62,10 @@ function App() {
       {show2 && <UseRefHook />}
       <button onClick={() => setShow3(!show3)} >UseCallbackHook</button>
       {show3 && <UseCallbackHook onIncrease={handleIncrease} />}
+      <button onClick={() => setShow4(!show4)} >UseMemo</button>
+      {show4 && <UseMemo />}
+      <button onClick={() => setShow5(!show5)} >UseReducer</button>
+      {show5 && <UseReducer />}
     </div>
   );
 }
