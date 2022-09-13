@@ -11,7 +11,7 @@ function useMemoHook() {
     const handleAdd = () => {
         setProducts([...products, {
             name, price: parseInt(price)
-        }])
+        }]);
         setName('');
         setPrice('');
 

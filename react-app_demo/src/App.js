@@ -5,6 +5,7 @@ import UseRefHook from './Hook/useRefHook';
 import UseCallbackHook from './Hook/useCallbackHook';
 import UseMemo from './Hook/useMemo';
 import UseReducer from './Hook/useReducerHook';
+import Context from './Hook/Context';
 
 const orders = [100, 200, 300];
 function App() {
@@ -40,6 +41,7 @@ function App() {
   const [show3, setShow3] = useState(false);
   const [show4, setShow4] = useState(false);
   const [show5, setShow5] = useState(false);
+  const [show6, setShow6] = useState(false);
 
   return (
     <div className="App" style={{ padding: 20 }}>
@@ -66,6 +68,8 @@ function App() {
       {show4 && <UseMemo />}
       <button onClick={() => setShow5(!show5)} >UseReducer</button>
       {show5 && <UseReducer />}
+      <button onClick={() => setShow6(!show6)} >Context</button>
+      {show6 && <Context />}
     </div>
   );
 }

@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import TwowayBinding from './Hook/TwowayBinding';
 import reportWebVitals from './reportWebVitals';
+import { StoreProvide } from './store';
+import GlobalState from './GlobalState';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,6 +18,15 @@ const root1 = ReactDOM.createRoot(document.getElementById('root1'));
 root1.render(
   <React.StrictMode>
     <TwowayBinding />
+  </React.StrictMode>
+);
+
+const root2 = ReactDOM.createRoot(document.getElementById('root2'));
+root2.render(
+  <React.StrictMode>
+    <StoreProvide>
+      <GlobalState />
+    </StoreProvide>
   </React.StrictMode>
 );
 
